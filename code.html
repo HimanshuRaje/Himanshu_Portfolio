@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Himanshu Jagtap | Software Engineer & Full-Stack Developer</title>
+  <meta name="description" content="Personal portfolio of Himanshu Jagtap - Software Engineering Intern @ Enacton Technologies, Full-Stack React Native & MERN Stack Developer." />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "#09090b",
+            "surface": "#121216",
+            "surface-elevated": "#1a1a22",
+            "surface-border": "rgba(255, 255, 255, 0.08)",
+            "primary": "#6366f1",
+            "primary-hover": "#4f46e5",
+            "primary-glow": "rgba(99, 102, 241, 0.25)",
+            "accent": "#10b981",
+            "text-main": "#f8fafc",
+            "text-muted": "#94a3b8",
+            "text-dark": "#64748b"
+          },
+          fontFamily: {
+            display: ["Geist", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          },
+          boxShadow: {
+            'glow': '0 0 25px -5px rgba(99, 102, 241, 0.3)',
+            'glow-emerald': '0 0 20px -3px rgba(16, 185, 129, 0.3)',
+            'card-hover': '0 10px 30px -10px rgba(0, 0, 0, 0.7), 0 0 1px 1px rgba(99, 102, 241, 0.3)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #09090b; }
+    ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #6366f1; }
+
+    /* Custom Cursor */
+    @media (pointer: fine) {
+      body { cursor: default; }
+      .cursor-dot {
+        pointer-events: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 8px; height: 8px;
+        background-color: #6366f1;
+        border-radius: 50%;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.1s ease, width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+      }
+      .cursor-ring {
+        pointer-events: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 36px; height: 36px;
+        border: 1px solid rgba(99, 102, 241, 0.4);
+        border-radius: 50%;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: transform 0.15s ease-out, width 0.2s ease, height 0.2s ease, border-color 0.2s ease;
+      }
+      body.hovered .cursor-ring {
+        width: 54px; height: 54px;
+        border-color: rgba(99, 102, 241, 0.8);
+        background-color: rgba(99, 102, 241, 0.05);
+      }
+      body.hovered .cursor-dot {
+        transform: translate(-50%, -50%) scale(1.5);
+      }
+    }
+
+    /* Animations & Utility */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Glassmorphism */
+    .glass-panel {
+      background: rgba(18, 18, 22, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card {
+      background: linear-gradient(135deg, rgba(26, 26, 34, 0.6) 0%, rgba(18, 18, 22, 0.8) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px 0 rgba(99, 102, 241, 0.15);
+    }
+
+    /* Interactive habit check animation */
+    .habit-checkbox:checked + .habit-checkmark {
+      background-color: #10b981;
+      border-color: #10b981;
+    }
+    .habit-checkbox:checked + .habit-checkmark .check-icon {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Terminal easter egg */
+    .terminal-scrollbar::-webkit-scrollbar { width: 4px; }
+    .terminal-scrollbar::-webkit-scrollbar-thumb { background: #3f3f46; }
+  </style>
+</head>
+<body class="bg-background text-text-main font-body antialiased overflow-x-hidden relative selection:bg-primary selection:text-white">
+
+  <!-- Custom Cursor Elements -->
+  <div id="cursor-dot" class="cursor-dot hidden md:block"></div>
+  <div id="cursor-ring" class="cursor-ring hidden md:block"></div>
+
+  <!-- Top Scroll Progress Bar -->
+  <div id="scroll-progress" class="fixed top-0 left-0 h-[2px] bg-gradient-to-r from-primary via-indigo-400 to-accent z-[100] transition-all duration-150 w-0"></div>
+
+  <!-- WebGL Ambient Canvas Shader -->
+  <div class="fixed inset-0 w-full h-full z-[-1] pointer-events-none opacity-50">
+    <canvas id="ambient-canvas" class="w-full h-full block"></canvas>
+  </div>
+
+  <!-- STICKY HEADER / NAVIGATION -->
+  <header id="main-header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 py-4 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto flex justify-between items-center glass-panel rounded-full py-2.5 px-6 border border-white/10">
+      
+      <!-- Monogram & Logo -->
+      <a href="#hero" id="logo-trigger" title="Click 5 times for Developer Console" class="flex items-center gap-3 group cursor-pointer">
+        <div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary font-mono text-xs font-bold group-hover:scale-105 group-hover:bg-primary group-hover:text-white transition-all">
+          HJ
+        </div>
+        <span class="font-display font-semibold tracking-tight text-sm text-text-main group-hover:text-primary transition-colors">
+          HIMANSHU JAGTAP
+        </span>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden md:flex items-center gap-8 text-xs font-mono tracking-wider uppercase">
+        <a href="#about" class="nav-item text-text-muted hover:text-primary transition-colors">About</a>
+        <a href="#projects" class="nav-item text-text-muted hover:text-primary transition-colors">Projects</a>
+        <a href="#experience" class="nav-item text-text-muted hover:text-primary transition-colors">Experience</a>
+        <a href="#stack" class="nav-item text-text-muted hover:text-primary transition-colors">Stack</a>
+        <a href="#education" class="nav-item text-text-muted hover:text-primary transition-colors">Education</a>
+        <a href="#beyond" class="nav-item text-text-muted hover:text-primary transition-colors">Beyond Code</a>
+        <a href="#contact" class="nav-item text-text-muted hover:text-primary transition-colors">Contact</a>
+      </nav>
+
+      <!-- Status Indicator & Mobile Toggle -->
+      <div class="flex items-center gap-4">
+        <div class="hidden sm:flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[11px] font-mono">
+          <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+          <span>AVAILABLE FOR BUILDING</span>
+        </div>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" aria-label="Toggle navigation menu" class="md:hidden text-text-muted hover:text-text-main p-1 focus:outline-none">
+          <span class="material-symbols-outlined text-2xl" id="menu-icon">menu</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MOBILE FULLSCREEN MENU OVERLAY -->
+  <div id="mobile-menu" class="fixed inset-0 z-40 bg-background/95 backdrop-blur-2xl flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-300">
+    <div class="flex flex-col items-center gap-6 text-xl font-display font-medium text-text-main">
+      <a href="#about" class="mobile-nav-link hover:text-primary transition-colors">About</a>
+      <a href="#projects" class="mobile-nav-link hover:text-primary transition-colors">Projects</a>
+      <a href="#experience" class="mobile-nav-link hover:text-primary transition-colors">Experience</a>
+      <a href="#stack" class="mobile-nav-link hover:text-primary transition-colors">Stack</a>
+      <a href="#education" class="mobile-nav-link hover:text-primary transition-colors">Education</a>
+      <a href="#beyond" class="mobile-nav-link hover:text-primary transition-colors">Beyond Code</a>
+      <a href="#contact" class="mobile-nav-link hover:text-primary transition-colors">Contact</a>
+      
+      <div class="mt-6 flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-mono">
+        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+        <span>CURRENTLY SHIPPING @ ENACTON</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTAINER -->
+  <main class="relative z-10 pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto space-y-36">
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="min-h-[85vh] flex flex-col lg:flex-row items-center justify-between gap-12 pt-8 reveal-up">
+      <!-- Left Content -->
+      <div class="flex-1 space-y-6">
+        
+        <!-- Role Badge -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-elevated border border-surface-border text-xs font-mono text-primary">
+          <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+          <span>Software Engineering Intern @ Enacton Technologies</span>
+        </div>
+
+        <!-- Hero Headline -->
+        <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-text-main leading-[1.1]">
+          Hi, I'm Himanshu.<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-text-main via-indigo-200 to-primary">
+            I build products that feel as good as they work.
+          </span>
+        </h1>
+
+        <!-- Supporting Role Info -->
+        <p class="text-lg md:text-xl text-text-muted max-w-2xl font-normal leading-relaxed">
+          Full-Stack React Native & MERN Stack Developer | B.Tech CSE '27.<br/>
+          Focused on bridging technical rigor, clean architecture, and intuitive user experiences across mobile and web.
+        </p>
+
+        <p class="text-sm font-mono text-text-dark">
+          Currently building mobile experiences at Enacton Technologies Pvt Ltd.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="pt-4 flex flex-wrap items-center gap-4">
+          <a href="#projects" class="magnetic inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-primary text-white font-medium text-sm hover:bg-primary-hover transition-all shadow-glow">
+            <span>Explore My Work</span>
+            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+          </a>
+
+          <a href="https://github.com/HimanshuRaje" target="_blank" rel="noopener" class="magnetic inline-flex items-center gap-2 px-6 py-3.5 rounded-xl glass-panel text-text-main font-medium text-sm hover:border-primary/50 transition-all">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>GitHub Profile</span>
+            <span class="material-symbols-outlined text-sm">open_in_new</span>
+          </a>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="pt-10 flex items-center gap-2 text-xs font-mono text-text-dark">
+          <span class="material-symbols-outlined text-sm animate-bounce text-primary">south</span>
+          <span>SCROLL TO EXPLORE STORY</span>
+        </div>
+      </div>
+
+      <!-- Right Interactive System Visualization -->
+      <div class="flex-1 w-full max-w-lg lg:max-w-none flex justify-center items-center">
+        <div class="relative w-full aspect-square max-w-[440px] glass-panel rounded-3xl p-6 border border-white/10 shadow-2xl flex flex-col justify-between overflow-hidden group">
+          <!-- Ambient Glow inside card -->
+          <div class="absolute -top-24 -right-24 w-64 h-64 bg-primary/20 rounded-full blur-3xl group-hover:bg-primary/30 transition-all"></div>
+          
+          <div class="flex justify-between items-center border-b border-white/10 pb-4">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
+            </div>
+            <span class="font-mono text-[11px] text-text-muted">system-architecture.node</span>
+          </div>
+
+          <!-- Dynamic Node Diagram -->
+          <div id="hero-node-container" class="relative my-6 h-64 flex flex-col justify-between items-center">
+            
+            <!-- Connection Lines (SVG) -->
+            <svg class="absolute inset-0 w-full h-full pointer-events-none stroke-primary/30" stroke-width="2" stroke-dasharray="4 4">
+              <line x1="50%" y1="15%" x2="20%" y2="45%"/>
+              <line x1="50%" y1="15%" x2="80%" y2="45%"/>
+              <line x1="20%" y1="45%" x2="50%" y2="85%"/>
+              <line x1="80%" y1="45%" x2="50%" y2="85%"/>
+              <line x1="50%" y1="45%" x2="50%" y2="85%"/>
+            </svg>
+
+            <!-- Top Node: React / React Native -->
+            <div class="node-item glass-card px-4 py-2.5 rounded-xl border border-primary/50 text-xs font-mono text-primary flex items-center gap-2 shadow-glow cursor-pointer hover:scale-110 transition-transform">
+              <span class="material-symbols-outlined text-sm">phone_iphone</span>
+              <span>React Native / React</span>
+            </div>
+
+            <!-- Middle Nodes -->
+            <div class="w-full flex justify-between px-2">
+              <div class="node-item glass-card px-3.5 py-2 rounded-xl border border-white/10 text-xs font-mono text-text-main flex items-center gap-2 cursor-pointer hover:scale-110 hover:border-primary transition-transform">
+                <span class="material-symbols-outlined text-sm text-accent">dns</span>
+                <span>Node.js API</span>
+              </div>
+              
+              <div class="node-item glass-card px-3.5 py-2 rounded-xl border border-white/10 text-xs font-mono text-text-main flex items-center gap-2 cursor-pointer hover:scale-110 hover:border-primary transition-transform">
+                <span class="material-symbols-outlined text-sm text-yellow-400">database</span>
+                <span>MongoDB</span>
+              </div>
+            </div>
+
+            <!-- Bottom Node: AI Integration -->
+            <div class="node-item glass-card px-4 py-2.5 rounded-xl border border-emerald-500/40 text-xs font-mono text-emerald-400 flex items-center gap-2 cursor-pointer hover:scale-110 shadow-glow-emerald transition-transform">
+              <span class="material-symbols-outlined text-sm">auto_awesome</span>
+              <span>Generative AI Engine</span>
+            </div>
+          </div>
+
+          <!-- Bottom Console Output -->
+          <div class="bg-black/50 rounded-xl p-3 border border-white/5 font-mono text-[11px] text-text-muted flex justify-between items-center">
+            <span class="text-accent flex items-center gap-1">
+              <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+              <span>Active Runtime</span>
+            </span>
+            <span class="text-text-dark">Interactive Mouse Sync</span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT / PHILOSOPHY SECTION -->
+    <section id="about" class="reveal-up space-y-12">
+      <div class="flex items-center gap-4 border-b border-surface-border pb-4">
+        <span class="font-mono text-xs text-primary">01 / PHILOSOPHY</span>
+        <h2 class="text-2xl md:text-3xl font-display font-bold text-text-main">Building things. Breaking things. Learning from both.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Main Statement Left -->
+        <div class="lg:col-span-7 space-y-6">
+          <h3 class="text-2xl sm:text-3xl font-display font-semibold text-text-main leading-snug">
+            "I'm a Software Engineering student and MERN stack developer who enjoys turning ideas into usable products."
+          </h3>
+          <p class="text-text-muted leading-relaxed text-base">
+            Results-oriented Software Engineering student & MERN stack developer focused on building scalable, client-focused solutions. I build mobile apps using React Native and high-performance backend systems with Node.js, Express, and MongoDB.
+          </p>
+          <p class="text-text-muted leading-relaxed text-base">
+            Whether it's designing personal finance tools powered by Generative AI or crafting responsive payment platforms, I believe every project should combine technical rigor with intuitive UX.
+          </p>
+        </div>
+
+        <!-- 5 Core Values Cards Right -->
+        <div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          
+          <div class="glass-card p-4 rounded-2xl space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
+              <span class="material-symbols-outlined text-lg">touch_app</span>
+            </div>
+            <h4 class="font-display font-semibold text-sm text-text-main">Usability</h4>
+            <p class="text-xs text-text-dark">Prioritizing smooth, friction-free interactions for real human users.</p>
+          </div>
+
+          <div class="glass-card p-4 rounded-2xl space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-accent">
+              <span class="material-symbols-outlined text-lg">speed</span>
+            </div>
+            <h4 class="font-display font-semibold text-sm text-text-main">Scalability</h4>
+            <p class="text-xs text-text-dark">Clean APIs, optimized MongoDB schemas, and modular frontend components.</p>
+          </div>
+
+          <div class="glass-card p-4 rounded-2xl space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+              <span class="material-symbols-outlined text-lg">architecture</span>
+            </div>
+            <h4 class="font-display font-semibold text-sm text-text-main">Clean Architecture</h4>
+            <p class="text-xs text-text-dark">Structured state management and readable, maintainable codebase.</p>
+          </div>
+
+          <div class="glass-card p-4 rounded-2xl space-y-2">
+            <div class="w-8 h-8 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+              <span class="material-symbols-outlined text-lg">psychology</span>
+            </div>
+            <h4 class="font-display font-semibold text-sm text-text-main">Problem Solving</h4>
+            <p class="text-xs text-text-dark">Applying DSA concepts and analytical thinking to resolve bottlenecks.</p>
+          </div>
+
+          <div class="glass-card p-4 rounded-2xl space-y-2 sm:col-span-2">
+            <div class="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+              <span class="material-symbols-outlined text-lg">school</span>
+            </div>
+            <h4 class="font-display font-semibold text-sm text-text-main">Continuous Learning</h4>
+            <p class="text-xs text-text-dark">Constantly expanding stack capabilities with AI integrations, mobile hybrid frameworks, and modern tools.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS SECTION — FEATURED CENTERPIECE -->
+    <section id="projects" class="reveal-up space-y-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-surface-border pb-6 gap-4">
+        <div>
+          <span class="font-mono text-xs text-primary">02 / CENTERPIECE</span>
+          <h2 class="text-3xl md:text-4xl font-display font-bold text-text-main mt-1">Things I've built.</h2>
+          <p class="text-text-muted text-sm mt-1">From finance and payments to habit tracking and authentication.</p>
+        </div>
+        <span class="font-mono text-xs text-text-dark">Click any project card to open full case study</span>
+      </div>
+
+      <div class="space-y-10">
+        
+        <!-- PROJECT 01 — FinAI (FEATURED LARGE CARD) -->
+        <div class="glass-card rounded-3xl p-6 lg:p-10 border border-primary/30 relative overflow-hidden group cursor-pointer" onclick="openCaseStudy('finai')">
+          <div class="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none group-hover:bg-primary/20 transition-all"></div>
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            
+            <!-- Content Left -->
+            <div class="lg:col-span-6 space-y-6">
+              <div class="flex items-center gap-3">
+                <span class="font-mono text-xs font-bold text-primary bg-primary/10 px-3 py-1 rounded-full border border-primary/30">FEATURED CASE STUDY</span>
+                <span class="font-mono text-xs text-text-dark">2025 – 2026</span>
+              </div>
+
+              <h3 class="text-3xl lg:text-4xl font-display font-bold text-text-main group-hover:text-primary transition-colors flex items-center gap-3">
+                <span>01 — FinAI</span>
+                <span class="material-symbols-outlined opacity-0 group-hover:opacity-100 group-hover:translate-x-2 transition-all text-2xl text-primary">arrow_forward</span>
+              </h3>
+
+              <p class="text-base font-medium text-indigo-300">
+                Personal Finance Tracker with AI Budget Advisor
+              </p>
+
+              <p class="text-sm text-text-muted leading-relaxed">
+                Full-stack MERN application engineered for expense tracking, budget management, and goal setting. Features an integrated Generative AI budget advisor providing savings suggestions and automated monthly insights.
+              </p>
+
+              <!-- Tech Tags -->
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="px-2.5 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-muted border border-surface-border">React.js</span>
+                <span class="px-2.5 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-muted border border-surface-border">Node.js / Express</span>
+                <span class="px-2.5 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-muted border border-surface-border">MongoDB</span>
+                <span class="px-2.5 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-accent border border-accent/20">Gen AI API</span>
+                <span class="px-2.5 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-muted border border-surface-border">TailwindCSS</span>
+              </div>
+
+              <div class="pt-2">
+                <button class="inline-flex items-center gap-2 text-xs font-mono text-primary font-semibold group-hover:underline">
+                  <span>Explore FinAI Architecture & Case Study</span>
+                  <span class="material-symbols-outlined text-sm">open_in_new</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Interactive Mockup Right -->
+            <div class="lg:col-span-6" onclick="event.stopPropagation()">
+              <div class="glass-panel rounded-2xl p-5 border border-white/10 space-y-4 shadow-2xl">
+                <!-- Mockup Header -->
+                <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                  <div class="flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-accent"></span>
+                    <span class="font-mono text-xs text-text-muted ml-2">FinAI Dashboard</span>
+                  </div>
+                  <span class="px-2 py-0.5 rounded bg-accent/20 text-accent font-mono text-[10px]">AI Connected</span>
+                </div>
+
+                <!-- Monthly Spend & Insights Bar -->
+                <div class="grid grid-cols-2 gap-3">
+                  <div class="bg-surface-elevated p-3 rounded-xl border border-surface-border">
+                    <span class="text-[11px] font-mono text-text-dark">Monthly Budget</span>
+                    <p class="text-lg font-mono font-bold text-text-main">$2,400.00</p>
+                    <div class="w-full bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
+                      <div class="bg-primary h-full w-[65%]"></div>
+                    </div>
+                  </div>
+                  
+                  <div class="bg-surface-elevated p-3 rounded-xl border border-surface-border">
+                    <span class="text-[11px] font-mono text-text-dark">Savings Goal</span>
+                    <p class="text-lg font-mono font-bold text-accent">$850.00</p>
+                    <div class="w-full bg-white/10 h-1.5 rounded-full mt-2 overflow-hidden">
+                      <div class="bg-accent h-full w-[80%]"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Live AI Prompt Box Interactive -->
+                <div class="bg-indigo-950/40 p-3.5 rounded-xl border border-primary/30 space-y-2">
+                  <div class="flex justify-between items-center">
+                    <span class="text-xs font-mono text-indigo-300 flex items-center gap-1.5">
+                      <span class="material-symbols-outlined text-sm text-primary">auto_awesome</span>
+                      <span>AI Budget Advisor</span>
+                    </span>
+                    <button id="finai-sim-btn" onclick="triggerFinAiTip()" class="text-[10px] font-mono bg-primary px-2 py-1 rounded text-white hover:bg-primary-hover transition-colors">
+                      Ask AI Advisor
+                    </button>
+                  </div>
+                  <p id="finai-tip-text" class="text-xs text-text-muted italic">
+                    "Analyzing spending... Recommended tip: You can save $140/mo by capping food delivery subscriptions!"
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PROJECT GRID FOR PROJECTS 02 TO 05 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- PROJECT 02 — PulsePay -->
+          <div class="glass-card rounded-3xl p-6 border border-white/10 flex flex-col justify-between space-y-6 group cursor-pointer" onclick="openCaseStudy('pulsepay')">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="font-mono text-xs text-text-dark">2024</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-[11px] font-mono text-primary border border-primary/30">MERN FinTech</span>
+              </div>
+
+              <h3 class="text-2xl font-display font-bold text-text-main group-hover:text-primary transition-colors">
+                02 — PulsePay
+              </h3>
+              <p class="text-xs font-mono text-indigo-300">PhonePe Clone Platform</p>
+              <p class="text-sm text-text-muted leading-relaxed">
+                Payments platform clone handling secure authentication, wallet balance management, transaction flows, JWT auth, input validation, and REST API deployment.
+              </p>
+            </div>
+
+            <!-- Interactive Payment Mockup -->
+            <div onclick="event.stopPropagation()" class="bg-surface-elevated p-4 rounded-2xl border border-surface-border space-y-3">
+              <div class="flex justify-between items-center text-xs font-mono">
+                <span class="text-text-muted">Wallet Balance</span>
+                <span class="text-text-main font-bold">$1,250.00</span>
+              </div>
+              <div class="flex items-center justify-between bg-background p-2.5 rounded-xl border border-white/5">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-bold">P</div>
+                  <div>
+                    <p class="text-xs font-medium text-text-main">Send Money</p>
+                    <p class="text-[10px] text-text-dark font-mono">JWT Verified</p>
+                  </div>
+                </div>
+                <button id="pulsepay-sim-btn" onclick="triggerPulsePayTx()" class="px-3 py-1 rounded bg-primary text-[11px] font-mono text-white hover:bg-primary-hover transition-colors">
+                  Send $25
+                </button>
+              </div>
+              <p id="pulsepay-status" class="text-[10px] font-mono text-accent text-center hidden">✓ Transaction Executed via REST API</p>
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+              <span class="text-xs font-mono text-text-dark">REST API • JWT • MongoDB</span>
+              <span class="text-xs font-mono text-primary group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                <span>View Details</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- PROJECT 03 — Habitry -->
+          <div class="glass-card rounded-3xl p-6 border border-white/10 flex flex-col justify-between space-y-6 group cursor-pointer" onclick="openCaseStudy('habitry')">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="font-mono text-xs text-text-dark">2026</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-accent/10 text-[11px] font-mono text-accent border border-accent/20">React Native</span>
+              </div>
+
+              <h3 class="text-2xl font-display font-bold text-text-main group-hover:text-accent transition-colors">
+                03 — Habitry
+              </h3>
+              <p class="text-xs font-mono text-emerald-300">Minimal Habit Progress Tracker (Android)</p>
+              <p class="text-sm text-text-muted leading-relaxed">
+                Clean habit tracking application focused on daily progress, streaks, and consistency accountability built natively with React Native.
+              </p>
+            </div>
+
+            <!-- Interactive Habit Completion Mockup -->
+            <div onclick="event.stopPropagation()" class="bg-surface-elevated p-4 rounded-2xl border border-surface-border space-y-2.5">
+              <div class="flex justify-between items-center text-xs font-mono pb-1 border-b border-white/5">
+                <span class="text-text-muted">Today's Habits</span>
+                <span id="streak-counter" class="text-accent font-bold">🔥 5 Day Streak</span>
+              </div>
+              
+              <label class="flex items-center justify-between p-2 rounded-xl bg-background/50 cursor-pointer hover:bg-background transition-colors">
+                <span class="text-xs text-text-main">Code React Native Mobile App</span>
+                <input type="checkbox" checked onclick="updateHabitStreak(this)" class="habit-checkbox w-4 h-4 rounded border-white/20 text-accent focus:ring-accent accent-accent">
+              </label>
+
+              <label class="flex items-center justify-between p-2 rounded-xl bg-background/50 cursor-pointer hover:bg-background transition-colors">
+                <span class="text-xs text-text-main">Solve 2 DSA Problems</span>
+                <input type="checkbox" onclick="updateHabitStreak(this)" class="habit-checkbox w-4 h-4 rounded border-white/20 text-accent focus:ring-accent accent-accent">
+              </label>
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+              <span class="text-xs font-mono text-text-dark">React Native • Expo • Android</span>
+              <span class="text-xs font-mono text-accent group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                <span>View Details</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- PROJECT 04 — Trust Profile -->
+          <div class="glass-card rounded-3xl p-6 border border-white/10 flex flex-col justify-between space-y-6 group cursor-pointer" onclick="openCaseStudy('trustprofile')">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="font-mono text-xs text-text-dark">2025</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-[11px] font-mono text-indigo-300 border border-indigo-400/20">Full-Stack MERN</span>
+              </div>
+
+              <h3 class="text-2xl font-display font-bold text-text-main group-hover:text-primary transition-colors">
+                04 — Trust Profile
+              </h3>
+              <p class="text-xs font-mono text-indigo-300">Online Personality Test Platform</p>
+              <p class="text-sm text-text-muted leading-relaxed">
+                Dynamic assessment platform featuring real-time scoring calculations, personalized result pages, iterative delivery, and collaborative feature scoping.
+              </p>
+            </div>
+
+            <!-- Personality Radar Result Visual -->
+            <div onclick="event.stopPropagation()" class="bg-surface-elevated p-4 rounded-2xl border border-surface-border space-y-2 font-mono text-xs">
+              <div class="flex justify-between text-text-muted">
+                <span>Analytical Rigor</span>
+                <span class="text-primary">94%</span>
+              </div>
+              <div class="w-full bg-white/5 h-1.5 rounded-full"><div class="bg-primary h-full w-[94%]"></div></div>
+              <div class="flex justify-between text-text-muted pt-1">
+                <span>Collaboration</span>
+                <span class="text-accent">88%</span>
+              </div>
+              <div class="w-full bg-white/5 h-1.5 rounded-full"><div class="bg-accent h-full w-[88%]"></div></div>
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+              <span class="text-xs font-mono text-text-dark">MERN • Scoring Engine</span>
+              <span class="text-xs font-mono text-primary group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                <span>View Details</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- PROJECT 05 — AuthPro -->
+          <div class="glass-card rounded-3xl p-6 border border-white/10 flex flex-col justify-between space-y-6 group cursor-pointer" onclick="openCaseStudy('authpro')">
+            <div class="space-y-4">
+              <div class="flex justify-between items-center">
+                <span class="font-mono text-xs text-text-dark">2024</span>
+                <span class="px-2.5 py-0.5 rounded-full bg-surface-elevated text-[11px] font-mono text-amber-300 border border-amber-400/20">React + Firebase</span>
+              </div>
+
+              <h3 class="text-2xl font-display font-bold text-text-main group-hover:text-amber-400 transition-colors">
+                05 — AuthPro
+              </h3>
+              <p class="text-xs font-mono text-amber-300">Firebase OTP Authentication App</p>
+              <p class="text-sm text-text-muted leading-relaxed">
+                Production-ready authentication system leveraging Firebase OTP. Secured user sessions end-to-end with third-party SDK and API integrations into React.
+              </p>
+            </div>
+
+            <!-- OTP Input Pin Mockup -->
+            <div onclick="event.stopPropagation()" class="bg-surface-elevated p-4 rounded-2xl border border-surface-border space-y-2 text-center">
+              <p class="text-[11px] font-mono text-text-dark">Enter Verification Code</p>
+              <div class="flex justify-center gap-2">
+                <input type="text" maxlength="1" value="7" class="w-8 h-8 rounded-lg bg-background border border-primary/50 text-center font-mono text-sm text-primary font-bold">
+                <input type="text" maxlength="1" value="4" class="w-8 h-8 rounded-lg bg-background border border-primary/50 text-center font-mono text-sm text-primary font-bold">
+                <input type="text" maxlength="1" value="9" class="w-8 h-8 rounded-lg bg-background border border-primary/50 text-center font-mono text-sm text-primary font-bold">
+                <input type="text" maxlength="1" value="2" class="w-8 h-8 rounded-lg bg-background border border-primary/50 text-center font-mono text-sm text-primary font-bold">
+              </div>
+              <p class="text-[10px] font-mono text-accent pt-1">✓ Firebase Phone Auth Verified</p>
+            </div>
+
+            <div class="flex justify-between items-center pt-2">
+              <span class="text-xs font-mono text-text-dark">React.js • Firebase SDK</span>
+              <span class="text-xs font-mono text-amber-400 group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                <span>View Details</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE SECTION -->
+    <section id="experience" class="reveal-up space-y-12">
+      <div class="flex items-center gap-4 border-b border-surface-border pb-4">
+        <span class="font-mono text-xs text-primary">03 / EXPERIENCE</span>
+        <h2 class="text-2xl md:text-3xl font-display font-bold text-text-main">Currently shipping.</h2>
+      </div>
+
+      <!-- Experience Card with Interactive Mobile Frame Hover Visual -->
+      <div class="glass-card rounded-3xl p-6 md:p-10 border border-white/10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left Experience Details -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-accent animate-ping"></span>
+            <span class="font-mono text-xs text-accent">2026 — Present (Current)</span>
+          </div>
+
+          <h3 class="text-3xl font-display font-bold text-text-main">Enacton Technologies Pvt Ltd</h3>
+          <p class="text-base font-mono text-primary font-medium">React Native Hybrid App Developer</p>
+          
+          <p class="text-text-muted leading-relaxed text-sm pt-2">
+            Currently working as a React Native Hybrid App Developer, contributing to the development of hybrid mobile applications and delivering client-focused solutions.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-3 py-1 rounded-full bg-surface-elevated text-xs font-mono text-text-muted border border-surface-border">React Native</span>
+            <span class="px-3 py-1 rounded-full bg-surface-elevated text-xs font-mono text-text-muted border border-surface-border">Hybrid Mobile Apps</span>
+            <span class="px-3 py-1 rounded-full bg-surface-elevated text-xs font-mono text-text-muted border border-surface-border">Client Solutions</span>
+            <span class="px-3 py-1 rounded-full bg-surface-elevated text-xs font-mono text-text-muted border border-surface-border">REST API Integration</span>
+          </div>
+        </div>
+
+        <!-- Right Simulated Mobile App Interactive Preview -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="w-64 glass-panel rounded-[32px] p-4 border-2 border-white/15 shadow-2xl space-y-3">
+            <!-- Mobile Screen Header -->
+            <div class="flex justify-between items-center text-[10px] font-mono text-text-dark px-1">
+              <span>9:41</span>
+              <div class="w-12 h-3 bg-black rounded-full border border-white/10"></div>
+              <span>100%</span>
+            </div>
+
+            <!-- Simulated Mobile App Content -->
+            <div class="bg-surface-elevated p-3 rounded-2xl border border-surface-border space-y-3">
+              <div class="flex justify-between items-center">
+                <span class="text-xs font-bold text-text-main">Enacton App Hub</span>
+                <span class="w-2 h-2 rounded-full bg-accent"></span>
+              </div>
+              
+              <!-- Tab Switcher -->
+              <div class="grid grid-cols-3 gap-1 bg-background p-1 rounded-lg text-[10px] font-mono text-center">
+                <button onclick="setMobileTab('feed')" id="tab-feed" class="py-1 rounded bg-primary text-white font-bold">Build</button>
+                <button onclick="setMobileTab('stats')" id="tab-stats" class="py-1 rounded text-text-muted hover:text-white">API</button>
+                <button onclick="setMobileTab('state')" id="tab-state" class="py-1 rounded text-text-muted hover:text-white">State</button>
+              </div>
+
+              <!-- Tab Content Output -->
+              <div id="mobile-tab-content" class="text-[11px] font-mono text-indigo-200 p-2 bg-background/50 rounded-lg border border-white/5 min-h-[80px] flex items-center justify-center text-center">
+                <span>📱 Rendering React Native Hybrid View</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TECH STACK SECTION ("MY TOOLBOX") -->
+    <section id="stack" class="reveal-up space-y-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-surface-border pb-4 gap-4">
+        <div>
+          <span class="font-mono text-xs text-primary">04 / TOOLBOX</span>
+          <h2 class="text-2xl md:text-3xl font-display font-bold text-text-main mt-1">My toolbox.</h2>
+        </div>
+        <span class="font-mono text-xs text-text-dark">Hover any technology node to reveal connections</span>
+      </div>
+
+      <!-- Filter Buttons -->
+      <div class="flex flex-wrap gap-2 text-xs font-mono">
+        <button onclick="filterStack('all')" class="stack-filter-btn px-4 py-2 rounded-xl bg-primary text-white font-semibold">ALL</button>
+        <button onclick="filterStack('languages')" class="stack-filter-btn px-4 py-2 rounded-xl bg-surface-elevated text-text-muted hover:text-text-main border border-surface-border">LANGUAGES</button>
+        <button onclick="filterStack('frontend')" class="stack-filter-btn px-4 py-2 rounded-xl bg-surface-elevated text-text-muted hover:text-text-main border border-surface-border">FRONTEND</button>
+        <button onclick="filterStack('backend')" class="stack-filter-btn px-4 py-2 rounded-xl bg-surface-elevated text-text-muted hover:text-text-main border border-surface-border">BACKEND</button>
+        <button onclick="filterStack('database')" class="stack-filter-btn px-4 py-2 rounded-xl bg-surface-elevated text-text-muted hover:text-text-main border border-surface-border">DATABASE</button>
+        <button onclick="filterStack('tools')" class="stack-filter-btn px-4 py-2 rounded-xl bg-surface-elevated text-text-muted hover:text-text-main border border-surface-border">TOOLS</button>
+        <button onclick="filterStack('ai')" class="stack-filter-btn px-4 py-2 rounded-xl bg-surface-elevated text-text-muted hover:text-text-main border border-surface-border">AI / ML</button>
+        <button onclick="filterStack('cs')" class="stack-filter-btn px-4 py-2 rounded-xl bg-surface-elevated text-text-muted hover:text-text-main border border-surface-border">CORE CS</button>
+      </div>
+
+      <!-- Stack Grid Container -->
+      <div id="stack-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        
+        <!-- LANGUAGES -->
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="languages" onclick="showTechNote('JavaScript', 'ES6+, Asynchronous JS, Promises & Event Loop')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-yellow-500/10 border border-yellow-500/30 flex items-center justify-center text-yellow-400 font-mono font-bold group-hover:scale-110 transition-transform">JS</div>
+          <p class="font-display font-semibold text-xs text-text-main">JavaScript</p>
+          <span class="text-[10px] font-mono text-text-dark block">ES6+</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="languages" onclick="showTechNote('C++', 'Data Structures, Memory & Algorithmic Problem Solving')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono font-bold group-hover:scale-110 transition-transform">C++</div>
+          <p class="font-display font-semibold text-xs text-text-main">C++</p>
+          <span class="text-[10px] font-mono text-text-dark block">DSA & OOP</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="languages" onclick="showTechNote('Python', 'Scripting, ML Fundamentals & Automation')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-mono font-bold group-hover:scale-110 transition-transform">PY</div>
+          <p class="font-display font-semibold text-xs text-text-main">Python</p>
+          <span class="text-[10px] font-mono text-text-dark block">Scripting / ML</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="languages" onclick="showTechNote('Java', 'Object-Oriented Programming & Core Concepts')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-red-500/10 border border-red-500/30 flex items-center justify-center text-red-400 font-mono font-bold group-hover:scale-110 transition-transform">JV</div>
+          <p class="font-display font-semibold text-xs text-text-main">Java</p>
+          <span class="text-[10px] font-mono text-text-dark block">Core OOP</span>
+        </div>
+
+        <!-- FRONTEND -->
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="frontend" onclick="showTechNote('React.js', 'Component Architecture, Hooks & Modern Web Dashboards')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-mono font-bold group-hover:scale-110 transition-transform">React</div>
+          <p class="font-display font-semibold text-xs text-text-main">React.js</p>
+          <span class="text-[10px] font-mono text-text-dark block">Web UI</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="frontend" onclick="showTechNote('React Native', 'Cross-Platform Mobile Apps @ Enacton Technologies')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-primary/20 border border-primary/40 flex items-center justify-center text-primary font-mono font-bold group-hover:scale-110 transition-transform">RN</div>
+          <p class="font-display font-semibold text-xs text-text-main">React Native</p>
+          <span class="text-[10px] font-mono text-text-dark block">Mobile Native</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="frontend" onclick="showTechNote('Expo', 'React Native Tooling & Cross-Platform Mobile Deployment')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-mono font-bold group-hover:scale-110 transition-transform">EX</div>
+          <p class="font-display font-semibold text-xs text-text-main">Expo</p>
+          <span class="text-[10px] font-mono text-text-dark block">Mobile Tooling</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="frontend" onclick="showTechNote('TailwindCSS', 'Utility-First Styling for High-Performance UIs')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 font-mono font-bold group-hover:scale-110 transition-transform">TW</div>
+          <p class="font-display font-semibold text-xs text-text-main">TailwindCSS</p>
+          <span class="text-[10px] font-mono text-text-dark block">Styling</span>
+        </div>
+
+        <!-- BACKEND -->
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="backend" onclick="showTechNote('Node.js', 'Asynchronous Event-Driven Backend Architecture')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-accent/20 border border-accent/40 flex items-center justify-center text-accent font-mono font-bold group-hover:scale-110 transition-transform">Node</div>
+          <p class="font-display font-semibold text-xs text-text-main">Node.js</p>
+          <span class="text-[10px] font-mono text-text-dark block">Backend Engine</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="backend" onclick="showTechNote('Express.js', 'Modular RESTful API Routing & Middleware')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-gray-500/10 border border-gray-500/30 flex items-center justify-center text-text-main font-mono font-bold group-hover:scale-110 transition-transform">EX</div>
+          <p class="font-display font-semibold text-xs text-text-main">Express.js</p>
+          <span class="text-[10px] font-mono text-text-dark block">REST Framework</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="backend" onclick="showTechNote('REST APIs', 'Endpoint Design, Authentication & Payload Validation')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-mono font-bold group-hover:scale-110 transition-transform">API</div>
+          <p class="font-display font-semibold text-xs text-text-main">REST APIs</p>
+          <span class="text-[10px] font-mono text-text-dark block">HTTP Protocol</span>
+        </div>
+
+        <!-- DATABASE -->
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="database" onclick="showTechNote('MongoDB', 'NoSQL Document Store & Mongoose Schemas')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-accent font-mono font-bold group-hover:scale-110 transition-transform">MDB</div>
+          <p class="font-display font-semibold text-xs text-text-main">MongoDB</p>
+          <span class="text-[10px] font-mono text-text-dark block">NoSQL Database</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="database" onclick="showTechNote('PostgreSQL / MySQL', 'Relational Schema Design & SQL Queries')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400 font-mono font-bold group-hover:scale-110 transition-transform">SQL</div>
+          <p class="font-display font-semibold text-xs text-text-main">SQL / Postgres</p>
+          <span class="text-[10px] font-mono text-text-dark block">Relational DB</span>
+        </div>
+
+        <!-- TOOLS -->
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="tools" onclick="showTechNote('Git & GitHub', 'Version Control, Branch Management & Code Collaboration')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 font-mono font-bold group-hover:scale-110 transition-transform">GIT</div>
+          <p class="font-display font-semibold text-xs text-text-main">Git / GitHub</p>
+          <span class="text-[10px] font-mono text-text-dark block">Version Control</span>
+        </div>
+
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="tools" onclick="showTechNote('Firebase', 'Authentication, OTP & Real-time Third-Party SDKs')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 font-mono font-bold group-hover:scale-110 transition-transform">FB</div>
+          <p class="font-display font-semibold text-xs text-text-main">Firebase</p>
+          <span class="text-[10px] font-mono text-text-dark block">Auth / SDK</span>
+        </div>
+
+        <!-- AI / ML -->
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="ai" onclick="showTechNote('Generative AI Tools', 'AI API Integration, Prompt Engineering & LLM Workflows')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400 font-mono font-bold group-hover:scale-110 transition-transform">AI</div>
+          <p class="font-display font-semibold text-xs text-text-main">Gen AI Integration</p>
+          <span class="text-[10px] font-mono text-text-dark block">LLM APIs</span>
+        </div>
+
+        <!-- CORE CS -->
+        <div class="stack-card glass-card p-4 rounded-2xl text-center space-y-2 group cursor-pointer" data-cat="cs" onclick="showTechNote('DSA', 'Data Structures & Algorithms Problem Solving')">
+          <div class="w-10 h-10 mx-auto rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 font-mono font-bold group-hover:scale-110 transition-transform">DSA</div>
+          <p class="font-display font-semibold text-xs text-text-main">Data Structures</p>
+          <span class="text-[10px] font-mono text-text-dark block">Algorithms</span>
+        </div>
+
+      </div>
+
+      <!-- Contextual Tech Note Box -->
+      <div id="tech-note-box" class="glass-panel p-4 rounded-2xl border border-primary/30 flex items-center gap-3 text-xs font-mono hidden">
+        <span class="material-symbols-outlined text-primary text-base">info</span>
+        <div>
+          <span id="tech-note-title" class="font-bold text-text-main">JavaScript</span>: 
+          <span id="tech-note-desc" class="text-text-muted">ES6+, Asynchronous JS, Promises & Event Loop</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & JOURNEY SECTION -->
+    <section id="education" class="reveal-up space-y-12">
+      <div class="flex items-center gap-4 border-b border-surface-border pb-4">
+        <span class="font-mono text-xs text-primary">05 / JOURNEY</span>
+        <h2 class="text-2xl md:text-3xl font-display font-bold text-text-main">Academic foundation.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Degree Details Card Left -->
+        <div class="lg:col-span-7 glass-card p-6 md:p-8 rounded-3xl border border-white/10 space-y-6">
+          <div class="flex justify-between items-start">
+            <div>
+              <span class="font-mono text-xs text-primary">2023 — 2027</span>
+              <h3 class="text-2xl font-display font-bold text-text-main mt-1">B.Tech in Computer Science Engineering</h3>
+              <p class="text-sm font-mono text-text-muted">Parul University, Vadodara</p>
+            </div>
+            <div class="px-3 py-1.5 rounded-xl bg-accent/10 border border-accent/20 text-accent font-mono text-xs font-bold text-center">
+              CGPA: 7.86 / 10
+            </div>
+          </div>
+
+          <p class="text-sm text-text-muted leading-relaxed">
+            Pursuing Computer Science Engineering with a strong focus on software engineering, algorithm design, full-stack web development, and active hackathon participation.
+          </p>
+
+          <div class="space-y-3 pt-2">
+            <span class="text-xs font-mono text-text-dark uppercase tracking-wider">Relevant Coursework:</span>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Data Structures & Algorithms</span>
+              <span class="px-3 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Object-Oriented Programming (OOP)</span>
+              <span class="px-3 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Database Management Systems (DBMS)</span>
+              <span class="px-3 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Operating Systems</span>
+              <span class="px-3 py-1 rounded-lg bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Computer Networks</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CERTIFICATIONS & HACKATHONS RIGHT -->
+        <div class="lg:col-span-5 space-y-6">
+          
+          <!-- Certifications -->
+          <div class="glass-card p-6 rounded-3xl border border-white/10 space-y-4">
+            <h4 class="font-display font-bold text-base text-text-main flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary text-lg">verified</span>
+              <span>Certifications</span>
+            </h4>
+            
+            <div class="space-y-3 font-mono text-xs">
+              <div class="p-3 rounded-xl bg-surface-elevated border border-surface-border">
+                <p class="text-text-main font-semibold">Full Stack Web Development — Cohort 2.0</p>
+                <p class="text-text-dark text-[11px]">By Harkirat Singh</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-surface-elevated border border-surface-border">
+                <p class="text-text-main font-semibold">Full DSA Course</p>
+                <p class="text-text-dark text-[11px]">Apna College</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-surface-elevated border border-surface-border">
+                <p class="text-text-main font-semibold">Machine Learning (2025)</p>
+                <p class="text-text-dark text-[11px]">Acmegrade</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hackathons Wall -->
+          <div class="glass-card p-6 rounded-3xl border border-white/10 space-y-4">
+            <h4 class="font-display font-bold text-base text-text-main flex items-center gap-2">
+              <span class="material-symbols-outlined text-accent text-lg">code_off</span>
+              <span>Hackathon Milestones</span>
+            </h4>
+            
+            <div class="flex flex-wrap gap-2 text-xs font-mono">
+              <span class="px-3 py-1.5 rounded-xl bg-accent/10 border border-accent/30 text-accent font-semibold">Odoo x Parul Hackathon (2026 - Ongoing)</span>
+              <span class="px-3 py-1.5 rounded-xl bg-surface-elevated border border-surface-border text-text-muted">PU Code Hackathon (2024, 2025, 2026)</span>
+              <span class="px-3 py-1.5 rounded-xl bg-surface-elevated border border-surface-border text-text-muted">Smart India Hackathon (2025, 2026)</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BEYOND THE CODE (INTERESTS & ATTRIBUTES) -->
+    <section id="beyond" class="reveal-up space-y-12">
+      <div class="flex flex-col md:flex-row md:items-end justify-between border-b border-surface-border pb-4 gap-4">
+        <div>
+          <span class="font-mono text-xs text-primary">06 / HUMAN SIDE</span>
+          <h2 class="text-2xl md:text-3xl font-display font-bold text-text-main mt-1">Beyond the code.</h2>
+        </div>
+        <p class="font-mono text-xs text-text-muted italic">"Code is what I build. Curiosity is what keeps me building."</p>
+      </div>
+
+      <!-- 4 Interactive Interest Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        
+        <!-- Football -->
+        <div class="glass-card p-6 rounded-3xl border border-white/10 space-y-4 group hover:border-emerald-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-accent">
+            <span class="material-symbols-outlined text-xl">sports_soccer</span>
+          </div>
+          <h3 class="font-display font-bold text-lg text-text-main">Football</h3>
+          <p class="text-xs text-text-muted leading-relaxed">
+            Passion for teamwork, strategy, swift tactical decisions, and high energy performance.
+          </p>
+          <div class="pt-2 text-[11px] font-mono text-accent">Tactical mindset on & off pitch</div>
+        </div>
+
+        <!-- Reading -->
+        <div class="glass-card p-6 rounded-3xl border border-white/10 space-y-4 group hover:border-blue-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center text-blue-400">
+            <span class="material-symbols-outlined text-xl">menu_book</span>
+          </div>
+          <h3 class="font-display font-bold text-lg text-text-main">Reading</h3>
+          <p class="text-xs text-text-muted leading-relaxed">
+            Constantly consuming tech articles, system design blogs, and personal growth literature.
+          </p>
+          <div class="pt-2 text-[11px] font-mono text-blue-400">Expanding perspective daily</div>
+        </div>
+
+        <!-- Learning -->
+        <div class="glass-card p-6 rounded-3xl border border-white/10 space-y-4 group hover:border-purple-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+            <span class="material-symbols-outlined text-xl">psychology_alt</span>
+          </div>
+          <h3 class="font-display font-bold text-lg text-text-main">Learning New Things</h3>
+          <p class="text-xs text-text-muted leading-relaxed">
+            Exploring emerging frameworks, AI tools, and novel architectural patterns.
+          </p>
+          <div class="pt-2 text-[11px] font-mono text-purple-400">Always curious</div>
+        </div>
+
+        <!-- Helping Others -->
+        <div class="glass-card p-6 rounded-3xl border border-white/10 space-y-4 group hover:border-amber-500/40 transition-all">
+          <div class="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <span class="material-symbols-outlined text-xl">group_add</span>
+          </div>
+          <h3 class="font-display font-bold text-lg text-text-main">Helping Others</h3>
+          <p class="text-xs text-text-muted leading-relaxed">
+            Mentoring peers, sharing code snippets, and fostering collaborative team environments.
+          </p>
+          <div class="pt-2 text-[11px] font-mono text-amber-400">Community & Mentorship</div>
+        </div>
+
+      </div>
+
+      <!-- Personal Attributes Badges & Languages -->
+      <div class="glass-panel p-6 rounded-3xl border border-white/10 space-y-4">
+        <span class="text-xs font-mono text-text-dark uppercase tracking-wider block">Personal Attributes & Languages</span>
+        
+        <div class="flex flex-wrap gap-2">
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Strong Problem-Solving</span>
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Critical Thinking</span>
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Adaptability</span>
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Continuous Learning</span>
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Leadership</span>
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Team Collaboration</span>
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Time Management</span>
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Agile Practices</span>
+          <span class="px-3 py-1.5 rounded-xl bg-surface-elevated text-xs font-mono text-text-main border border-surface-border">Communication</span>
+        </div>
+
+        <div class="pt-2 flex items-center gap-3 text-xs font-mono text-text-muted border-t border-white/5">
+          <span class="text-text-dark">Languages Spoken:</span>
+          <span class="text-text-main font-semibold">English</span> •
+          <span class="text-text-main font-semibold">Hindi</span> •
+          <span class="text-text-main font-semibold">Marathi</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GITHUB / OPEN SOURCE SECTION -->
+    <section id="github" class="reveal-up space-y-8">
+      <div class="glass-card rounded-3xl p-8 md:p-12 border border-white/10 space-y-8">
+        
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div class="space-y-2">
+            <span class="font-mono text-xs text-primary">07 / OPEN SOURCE</span>
+            <h2 class="text-2xl md:text-4xl font-display font-bold text-text-main">
+              Don't just take my word for it.<br/>Look at the code.
+            </h2>
+          </div>
+
+          <a href="https://github.com/HimanshuRaje" target="_blank" rel="noopener" class="magnetic px-6 py-3.5 rounded-xl bg-primary text-white font-medium text-sm hover:bg-primary-hover transition-colors flex items-center gap-2 shadow-glow">
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>View GitHub @HimanshuRaje</span>
+          </a>
+        </div>
+
+        <!-- Simulated GitHub 52-Week Contribution Grid -->
+        <div class="space-y-3">
+          <div class="flex justify-between items-center text-xs font-mono text-text-dark">
+            <span>github.com/HimanshuRaje activity</span>
+            <span>52 Weeks Commit Frequency</span>
+          </div>
+
+          <div id="github-grid" class="grid grid-flow-col grid-rows-7 gap-1 overflow-x-auto pb-2">
+            <!-- Dynamically populated via JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="reveal-up space-y-12">
+      <div class="flex items-center gap-4 border-b border-surface-border pb-4">
+        <span class="font-mono text-xs text-primary">08 / CONTACT</span>
+        <h2 class="text-2xl md:text-3xl font-display font-bold text-text-main">Let's build together.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Contact Info Left -->
+        <div class="lg:col-span-5 space-y-6">
+          <h3 class="text-3xl sm:text-4xl font-display font-bold text-text-main leading-tight">
+            Have an idea?<br/>Let's build it.
+          </h3>
+
+          <p class="text-text-muted text-sm leading-relaxed">
+            Whether it's a product idea, collaboration, internship opportunity, or simply a conversation about modern software architecture — I'd love to hear from you.
+          </p>
+
+          <div class="space-y-4 pt-2">
+            <!-- Email Item -->
+            <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-primary text-xl">mail</span>
+                <div>
+                  <p class="text-[11px] font-mono text-text-dark">Email Address</p>
+                  <a href="mailto:himanshujagtap05@gmail.com" class="text-xs font-mono font-semibold text-text-main hover:text-primary transition-colors">himanshujagtap05@gmail.com</a>
+                </div>
+              </div>
+              <button onclick="copyToClipboard('himanshujagtap05@gmail.com')" class="text-xs font-mono text-primary hover:underline">Copy</button>
+            </div>
+
+            <!-- Phone Item -->
+            <div class="glass-card p-4 rounded-2xl border border-white/10 flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-accent text-xl">call</span>
+                <div>
+                  <p class="text-[11px] font-mono text-text-dark">Phone Contact</p>
+                  <a href="tel:+919028664700" class="text-xs font-mono font-semibold text-text-main hover:text-accent transition-colors">+91 9028664700</a>
+                </div>
+              </div>
+              <a href="tel:+919028664700" class="text-xs font-mono text-accent hover:underline">Call</a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex gap-4">
+              <a href="https://github.com/HimanshuRaje" target="_blank" rel="noopener" class="flex-1 glass-card p-3 rounded-xl border border-white/10 text-center font-mono text-xs text-text-main hover:border-primary transition-all">
+                GitHub ↗
+              </a>
+              <a href="https://www.linkedin.com/in/himanshu-jagtap-" target="_blank" rel="noopener" class="flex-1 glass-card p-3 rounded-xl border border-white/10 text-center font-mono text-xs text-text-main hover:border-primary transition-all">
+                LinkedIn ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Interactive Contact Form Right -->
+        <div class="lg:col-span-7 glass-card p-6 md:p-8 rounded-3xl border border-white/10 space-y-4">
+          <h4 class="font-display font-semibold text-lg text-text-main">Send Me a Quick Message</h4>
+
+          <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-mono text-text-dark mb-1">Your Name</label>
+                <input type="text" required placeholder="Alex Rivera" class="w-full bg-surface-elevated border border-surface-border rounded-xl px-4 py-3 text-sm text-text-main focus:outline-none focus:border-primary transition-colors">
+              </div>
+              <div>
+                <label class="block text-xs font-mono text-text-dark mb-1">Your Email</label>
+                <input type="email" required placeholder="alex@company.com" class="w-full bg-surface-elevated border border-surface-border rounded-xl px-4 py-3 text-sm text-text-main focus:outline-none focus:border-primary transition-colors">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-text-dark mb-1">Subject</label>
+              <input type="text" required placeholder="Product Collaboration / Engineering Role" class="w-full bg-surface-elevated border border-surface-border rounded-xl px-4 py-3 text-sm text-text-main focus:outline-none focus:border-primary transition-colors">
+            </div>
+
+            <div>
+              <label class="block text-xs font-mono text-text-dark mb-1">Message</label>
+              <textarea required rows="4" placeholder="Hi Himanshu, I'd love to chat about..." class="w-full bg-surface-elevated border border-surface-border rounded-xl px-4 py-3 text-sm text-text-main focus:outline-none focus:border-primary transition-colors"></textarea>
+            </div>
+
+            <button type="submit" class="magnetic w-full py-3.5 rounded-xl bg-primary text-white font-medium text-sm hover:bg-primary-hover transition-colors shadow-glow flex items-center justify-center gap-2">
+              <span>Send Message</span>
+              <span class="material-symbols-outlined text-sm">send</span>
+            </button>
+          </form>
+
+          <div id="form-toast" class="hidden p-3 rounded-xl bg-accent/20 border border-accent/40 text-accent font-mono text-xs text-center">
+            ✓ Thank you! Your message has been sent successfully.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-surface-border bg-surface py-12 px-6 md:px-12 relative z-10">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      
+      <div class="space-y-1 text-center md:text-left">
+        <h4 class="font-display font-bold text-base text-text-main">HIMANSHU JAGTAP</h4>
+        <p class="font-mono text-xs text-text-dark">Software Engineer • React Native • MERN Stack</p>
+      </div>
+
+      <p class="font-mono text-xs text-text-muted italic">
+        "Built with curiosity, caffeine & code."
+      </p>
+
+      <div class="flex items-center gap-6 font-mono text-xs text-text-dark">
+        <a href="https://github.com/HimanshuRaje" target="_blank" rel="noopener" class="hover:text-primary transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/himanshu-jagtap-" target="_blank" rel="noopener" class="hover:text-primary transition-colors">LinkedIn</a>
+        <a href="mailto:himanshujagtap05@gmail.com" class="hover:text-primary transition-colors">Email</a>
+        <span>© 2026</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- CASE STUDY MODAL DRAWER -->
+  <div id="case-study-modal" class="fixed inset-0 z-[100] bg-black/80 backdrop-blur-xl flex justify-center items-center p-4 md:p-8 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="glass-panel w-full max-w-4xl max-h-[90vh] rounded-3xl border border-white/15 overflow-hidden flex flex-col shadow-2xl relative">
+      
+      <!-- Modal Header -->
+      <div class="p-6 border-b border-white/10 flex justify-between items-center bg-surface-elevated">
+        <div class="flex items-center gap-3">
+          <span id="cs-modal-tag" class="px-2.5 py-1 rounded-full bg-primary/20 text-primary font-mono text-xs">MERN</span>
+          <h3 id="cs-modal-title" class="font-display font-bold text-xl text-text-main">FinAI — Deep Dive Case Study</h3>
+        </div>
+        <button onclick="closeCaseStudy()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-text-main">
+          <span class="material-symbols-outlined text-sm">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body Scrollable -->
+      <div class="p-6 md:p-8 overflow-y-auto space-y-6 text-sm text-text-muted leading-relaxed font-body">
+        
+        <div>
+          <h4 class="font-display font-semibold text-base text-text-main mb-1">Project Overview</h4>
+          <p id="cs-modal-overview">Detailed overview content here...</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-4 rounded-2xl bg-surface-elevated border border-surface-border space-y-2">
+            <h5 class="font-display font-semibold text-xs text-text-main uppercase font-mono">Core Features Built</h5>
+            <ul id="cs-modal-features" class="list-disc list-inside space-y-1 text-xs text-text-muted">
+              <li>Feature item</li>
+            </ul>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-surface-elevated border border-surface-border space-y-2">
+            <h5 class="font-display font-semibold text-xs text-text-main uppercase font-mono">Architecture & Learnings</h5>
+            <p id="cs-modal-learnings" class="text-xs text-text-muted">Key engineering takeaways.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-white/10 bg-surface-elevated flex justify-end">
+        <button onclick="closeCaseStudy()" class="px-5 py-2 rounded-xl bg-primary text-white text-xs font-mono font-medium hover:bg-primary-hover transition-colors">
+          Close Case Study
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- DEVELOPER CLI TERMINAL EASTER EGG -->
+  <div id="terminal-modal" class="fixed inset-0 z-[110] bg-black/90 backdrop-blur-2xl flex justify-center items-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+    <div class="w-full max-w-2xl bg-black border border-primary/40 rounded-2xl overflow-hidden font-mono text-xs shadow-2xl flex flex-col h-[400px]">
+      
+      <!-- Terminal Header Bar -->
+      <div class="bg-zinc-900 px-4 py-2.5 border-b border-zinc-800 flex justify-between items-center text-zinc-400">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-red-500 cursor-pointer" onclick="toggleTerminal(false)"></span>
+          <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+          <span class="w-3 h-3 rounded-full bg-green-500"></span>
+          <span class="ml-2 text-zinc-300 font-bold">himanshu-shell v2.6.0 (tty1)</span>
+        </div>
+        <span class="text-[10px] text-zinc-500">Type 'help'</span>
+      </div>
+
+      <!-- Terminal Output Log -->
+      <div id="terminal-output" class="flex-1 p-4 overflow-y-auto space-y-2 text-zinc-300 terminal-scrollbar">
+        <p class="text-primary">Welcome to Himanshu Jagtap's Interactive Terminal Shell.</p>
+        <p class="text-zinc-500">Type <span class="text-accent font-bold">'help'</span> for available commands or <span class="text-amber-400 font-bold">'exit'</span> to close.</p>
+      </div>
+
+      <!-- Terminal Prompt Input -->
+      <div class="p-3 bg-zinc-950 border-t border-zinc-800 flex items-center gap-2">
+        <span class="text-accent font-bold">visitor@hj-portfolio:~$</span>
+        <input id="terminal-input" type="text" focus onkeydown="handleTerminalCommand(event)" class="flex-1 bg-transparent border-none outline-none text-zinc-100 font-mono text-xs focus:ring-0" placeholder="Type a command...">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC & INTERACTIVITIES -->
+  <script>
+    // -------------------------------------------------------------
+    // WebGL Ambient Background Shader
+    // -------------------------------------------------------------
+    (function initShader() {
+      const canvas = document.getElementById('ambient-canvas');
+      if (!canvas) return;
+      
+      function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+      window.addEventListener('resize', resize);
+      resize();
+
+      const gl = canvas.getContext('webgl');
+      if (!gl) return;
+
+      const vs = `attribute vec2 p; void main() { gl_Position = vec4(p, 0.0, 1.0); }`;
+      const fs = `
+        precision highp float;
+        uniform float u_time;
+        uniform vec2 u_res;
+        void main() {
+          vec2 st = gl_FragCoord.xy / u_res;
+          float noise = fract(sin(dot(st + u_time * 0.005, vec2(12.9898, 78.233))) * 43758.5453);
+          vec3 base = vec3(0.035, 0.035, 0.045);
+          vec3 indigo = vec3(0.38, 0.40, 0.94) * 0.06 * smoothstep(0.8, 0.0, length(st - 0.5));
+          gl_FragColor = vec4(base + indigo + noise * 0.012, 1.0);
+        }
+      `;
+
+      function compile(type, src) {
+        const s = gl.createShader(type);
+        gl.shaderSource(s, src);
+        gl.compileShader(s);
+        return s;
+      }
+
+      const prog = gl.createProgram();
+      gl.attachShader(prog, compile(gl.VERTEX_SHADER, vs));
+      gl.attachShader(prog, compile(gl.FRAGMENT_SHADER, fs));
+      gl.linkProgram(prog);
+      gl.useProgram(prog);
+
+      const buf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+      const pos = gl.getAttribLocation(prog, 'p');
+      gl.enableVertexAttribArray(pos);
+      gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+      const uTime = gl.getUniformLocation(prog, 'u_time');
+      const uRes = gl.getUniformLocation(prog, 'u_res');
+
+      function render(t) {
+        gl.viewport(0, 0, canvas.width, canvas.height);
+        gl.uniform1f(uTime, t * 0.001);
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+        requestAnimationFrame(render);
+      }
+      requestAnimationFrame(render);
+    })();
+
+    // -------------------------------------------------------------
+    // Custom Cursor Physics
+    // -------------------------------------------------------------
+    const dot = document.getElementById('cursor-dot');
+    const ring = document.getElementById('cursor-ring');
+    let mouseX = 0, mouseY = 0;
+    let ringX = 0, ringY = 0;
+
+    if (dot && ring) {
+      window.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+      });
+
+      function animateCursor() {
+        ringX += (mouseX - ringX) * 0.2;
+        ringY += (mouseY - ringY) * 0.2;
+        ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animateCursor);
+      }
+      animateCursor();
+
+      document.querySelectorAll('a, button, input, textarea, .glass-card, .cursor-pointer').forEach(el => {
+        el.addEventListener('mouseenter', () => document.body.classList.add('hovered'));
+        el.addEventListener('mouseleave', () => document.body.classList.remove('hovered'));
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Scroll Progress & Navbar Reveal
+    // -------------------------------------------------------------
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const currentScroll = window.scrollY;
+      if (progressBar && totalScroll > 0) {
+        progressBar.style.width = `${(currentScroll / totalScroll) * 100}%`;
+      }
+    });
+
+    // -------------------------------------------------------------
+    // Reveal On Scroll Observer
+    // -------------------------------------------------------------
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
+
+    // -------------------------------------------------------------
+    // Mobile Menu Toggle
+    // -------------------------------------------------------------
+    const mobileBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+    let isMenuOpen = false;
+
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        isMenuOpen = !isMenuOpen;
+        if (isMenuOpen) {
+          mobileMenu.classList.remove('opacity-0', 'pointer-events-none');
+          menuIcon.textContent = 'close';
+        } else {
+          mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+          menuIcon.textContent = 'menu';
+        }
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          isMenuOpen = false;
+          mobileMenu.classList.add('opacity-0', 'pointer-events-none');
+          menuIcon.textContent = 'menu';
+        });
+      });
+    }
+
+    // -------------------------------------------------------------
+    // Magnetic Buttons Physics
+    // -------------------------------------------------------------
+    document.querySelectorAll('.magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = 'translate(0px, 0px)';
+      });
+    });
+
+    // -------------------------------------------------------------
+    // Project Demos & Interactions
+    // -------------------------------------------------------------
+    // 1. FinAI AI Tip Generator
+    const finAiTips = [
+      '"Analyzing spending... Recommended tip: You can save $140/mo by capping food delivery subscriptions!"',
+      '"Insight: Subscribed recurring services increased by 12% this month. Consider reviewing unused tiers."',
+      '"Goal Progress: You are on track to hit your $850 savings target 4 days early!"'
+    ];
+    let tipIdx = 0;
+    function triggerFinAiTip() {
+      tipIdx = (tipIdx + 1) % finAiTips.length;
+      const el = document.getElementById('finai-tip-text');
+      if (el) el.textContent = finAiTips[tipIdx];
+    }
+
+    // 2. PulsePay Transaction Simulator
+    function triggerPulsePayTx() {
+      const status = document.getElementById('pulsepay-status');
+      if (status) {
+        status.classList.remove('hidden');
+        setTimeout(() => status.classList.add('hidden'), 3000);
+      }
+    }
+
+    // 3. Habitry Streak Counter
+    let currentStreak = 5;
+    function updateHabitStreak(checkbox) {
+      const counter = document.getElementById('streak-counter');
+      if (checkbox.checked) {
+        currentStreak++;
+      } else {
+        currentStreak = Math.max(0, currentStreak - 1);
+      }
+      if (counter) counter.textContent = `🔥 ${currentStreak} Day Streak`;
+    }
+
+    // 4. Mobile App Tab Preview in Experience Section
+    function setMobileTab(tab) {
+      const content = document.getElementById('mobile-tab-content');
+      document.querySelectorAll('#tab-feed, #tab-stats, #tab-state').forEach(b => {
+        b.className = 'py-1 rounded text-text-muted hover:text-white';
+      });
+      const activeBtn = document.getElementById(`tab-${tab}`);
+      if (activeBtn) activeBtn.className = 'py-1 rounded bg-primary text-white font-bold';
+
+      if (tab === 'feed') {
+        content.innerHTML = '<span>📱 Rendering React Native Hybrid View</span>';
+      } else if (tab === 'stats') {
+        content.innerHTML = '<span>⚡ Node.js API Latency: 24ms</span>';
+      } else if (tab === 'state') {
+        content.innerHTML = '<span>🔄 Redux Toolkit State Synchronized</span>';
+      }
+    }
+
+    // -------------------------------------------------------------
+    // Tech Stack Filtering & Notes
+    // -------------------------------------------------------------
+    function filterStack(cat) {
+      document.querySelectorAll('.stack-filter-btn').forEach(btn => {
+        btn.className = 'stack-filter-btn px-4 py-2 rounded-xl bg-surface-elevated text-text-muted hover:text-text-main border border-surface-border';
+      });
+      event.target.className = 'stack-filter-btn px-4 py-2 rounded-xl bg-primary text-white font-semibold';
+
+      document.querySelectorAll('.stack-card').forEach(card => {
+        if (cat === 'all' || card.dataset.cat === cat) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function showTechNote(title, desc) {
+      const box = document.getElementById('tech-note-box');
+      const t = document.getElementById('tech-note-title');
+      const d = document.getElementById('tech-note-desc');
+      if (box && t && d) {
+        t.textContent = title;
+        d.textContent = desc;
+        box.classList.remove('hidden');
+      }
+    }
+
+    // -------------------------------------------------------------
+    // GitHub Contribution Heatmap Generator
+    // -------------------------------------------------------------
+    (function generateGithubGrid() {
+      const grid = document.getElementById('github-grid');
+      if (!grid) return;
+      
+      const colors = ['bg-surface-elevated', 'bg-emerald-950', 'bg-emerald-800', 'bg-accent', 'bg-emerald-400'];
+      for (let i = 0; i < 364; i++) {
+        const sq = document.createElement('div');
+        const intensity = Math.random() > 0.4 ? Math.floor(Math.random() * 4) + 1 : 0;
+        sq.className = `w-2.5 h-2.5 rounded-sm ${colors[intensity]} hover:scale-125 transition-transform`;
+        sq.title = `Commit activity index: ${intensity * 3}`;
+        grid.appendChild(sq);
+      }
+    })();
+
+    // -------------------------------------------------------------
+    // Contact Form Handler
+    // -------------------------------------------------------------
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const toast = document.getElementById('form-toast');
+      if (toast) {
+        toast.classList.remove('hidden');
+        e.target.reset();
+        setTimeout(() => toast.classList.add('hidden'), 5000);
+      }
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      alert('Email copied to clipboard!');
+    }
+
+    // -------------------------------------------------------------
+    // Case Study Modal Logic
+    // -------------------------------------------------------------
+    const caseStudiesData = {
+      finai: {
+        tag: "FEATURED • MERN + AI",
+        title: "FinAI — Personal Finance & AI Advisor",
+        overview: "Built a full-stack MERN application for expense tracking, budget management, and goal setting. Integrated a Generative AI budget advisor that analyzes monthly spending habits to provide intelligent savings tips and automated reports.",
+        features: [
+          "AI-driven savings suggestions powered by Generative AI API integration",
+          "REST APIs constructed with Node.js and Express.js",
+          "MongoDB schemas for transaction persistence and user profiles",
+          "Responsive React dashboard styled with utility-first TailwindCSS"
+        ],
+        learnings: "Architected asynchronous AI API handling without blocking frontend render loops. Managed complex MongoDB aggregation pipelines for instant chart calculations."
+      },
+      pulsepay: {
+        tag: "MERN FINTECH",
+        title: "PulsePay — PhonePe Platform Clone",
+        overview: "Developed a full-stack payments platform clone handling user authentication, virtual wallet management, and real-time transaction processing.",
+        features: [
+          "JWT session authentication and password encryption",
+          "Express REST API endpoints for transfer validation & error handling",
+          "State management for instant wallet balance updates",
+          "End-to-end testing from UI to Database persistence"
+        ],
+        learnings: "Deepened understanding of transaction rollback mechanics, secure payload validation, and clean RESTful API design."
+      },
+      habitry: {
+        tag: "REACT NATIVE • ANDROID",
+        title: "Habitry — Minimal Habit Progress Tracker",
+        overview: "Clean habit tracking application focused on daily progress, habit streaks, and consistency accountability, built from scratch while mastering React Native.",
+        features: [
+          "Native mobile layout optimized for Android performance",
+          "Interactive habit completion toggles and automated streak counters",
+          "Clean, distraction-free minimalist user interface",
+          "Local state persistence for offline capability"
+        ],
+        learnings: "Mastered React Native layout flexbox patterns, component lifecycle optimization, and mobile gesture interactions."
+      },
+      trustprofile: {
+        tag: "MERN ASSESSMENT",
+        title: "Trust Profile — Dynamic Personality Testing",
+        overview: "Collaborative assessment platform providing real-time scoring calculation and personalized personality insight result pages.",
+        features: [
+          "Real-time scoring engine evaluating user responses",
+          "Personalized result breakdown dashboards with visual chart metrics",
+          "Collaborative feature scoping and agile delivery cycles"
+        ],
+        learnings: "Enhanced skills in agile team collaboration, component modularization, and dynamic rendering of assessment metrics."
+      },
+      authpro: {
+        tag: "REACT + FIREBASE",
+        title: "AuthPro — Firebase OTP Authentication",
+        overview: "Production-ready authentication system leveraging Firebase OTP to secure user sessions end-to-end.",
+        features: [
+          "Firebase Phone Authentication & OTP pin verification",
+          "End-to-end session management and route protection in React",
+          "Third-party SDK and API integration best practices"
+        ],
+        learnings: "Gained hands-on experience cleanly abstracting third-party SDK dependencies inside custom React hooks."
+      }
+    };
+
+    function openCaseStudy(id) {
+      const data = caseStudiesData[id];
+      if (!data) return;
+
+      document.getElementById('cs-modal-tag').textContent = data.tag;
+      document.getElementById('cs-modal-title').textContent = data.title;
+      document.getElementById('cs-modal-overview').textContent = data.overview;
+      
+      const fList = document.getElementById('cs-modal-features');
+      fList.innerHTML = data.features.map(f => `<li>${f}</li>`).join('');
+      
+      document.getElementById('cs-modal-learnings').textContent = data.learnings;
+
+      const modal = document.getElementById('case-study-modal');
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeCaseStudy() {
+      const modal = document.getElementById('case-study-modal');
+      modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    // -------------------------------------------------------------
+    // Developer Terminal Easter Egg Logic
+    // -------------------------------------------------------------
+    let logoClickCount = 0;
+    const logoTrigger = document.getElementById('logo-trigger');
+    if (logoTrigger) {
+      logoTrigger.addEventListener('click', (e) => {
+        logoClickCount++;
+        if (logoClickCount >= 5) {
+          toggleTerminal(true);
+          logoClickCount = 0;
+        }
+      });
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '`' || e.key === '~') {
+        e.preventDefault();
+        toggleTerminal(true);
+      }
+    });
+
+    function toggleTerminal(show) {
+      const modal = document.getElementById('terminal-modal');
+      if (show) {
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        document.getElementById('terminal-input')?.focus();
+      } else {
+        modal.classList.add('opacity-0', 'pointer-events-none');
+      }
+    }
+
+    function handleTerminalCommand(e) {
+      if (e.key !== 'Enter') return;
+      const input = e.target.value.trim().toLowerCase();
+      e.target.value = '';
+      if (!input) return;
+
+      const output = document.getElementById('terminal-output');
+      const cmdLine = document.createElement('p');
+      cmdLine.className = 'text-zinc-400 font-bold';
+      cmdLine.textContent = `visitor@hj-portfolio:~$ ${input}`;
+      output.appendChild(cmdLine);
+
+      const response = document.createElement('p');
+      response.className = 'text-zinc-200 pl-2';
+
+      switch(input) {
+        case 'help':
+          response.innerHTML = 'Available commands: <span class="text-accent">bio</span>, <span class="text-accent font-bold">skills</span>, <span class="text-accent">projects</span>, <span class="text-accent">contact</span>, <span class="text-accent">matrix</span>, <span class="text-accent">clear</span>, <span class="text-accent">exit</span>';
+          break;
+        case 'bio':
+          response.textContent = 'Himanshu Jagtap | Software Engineering Intern @ Enacton Technologies | B.Tech CSE \'27 | Full-Stack React Native & MERN Developer';
+          break;
+        case 'skills':
+          response.textContent = 'Languages: JS, C++, Python, Java | Mobile: React Native, Expo | Web: React, Node, Express, MongoDB, TailwindCSS | AI: GenAI APIs';
+          break;
+        case 'projects':
+          response.textContent = '1. FinAI (MERN+AI) 2. PulsePay (MERN FinTech) 3. Habitry (React Native) 4. Trust Profile (MERN) 5. AuthPro (React+Firebase)';
+          break;
+        case 'contact':
+          response.textContent = 'Email: himanshujagtap05@gmail.com | Phone: +91 9028664700 | GitHub: github.com/HimanshuRaje';
+          break;
+        case 'matrix':
+          response.className = 'text-emerald-400 font-mono text-[10px] animate-pulse';
+          response.textContent = '01001000 01001010 00100000 01010011 01010111 01000101 00100000 00110010 00110000 00110010 00110110';
+          break;
+        case 'clear':
+          output.innerHTML = '';
+          return;
+        case 'exit':
+          toggleTerminal(false);
+          return;
+        default:
+          response.className = 'text-red-400';
+          response.textContent = `Command not recognized: '${input}'. Type 'help' for options.`;
+      }
+      output.appendChild(response);
+      output.scrollTop = output.scrollHeight;
+    }
+  </script>
+</body>
+</html>
