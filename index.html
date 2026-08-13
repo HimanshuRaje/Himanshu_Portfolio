@@ -3,6 +3,11 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  
+  <!-- Favicon / Head Logo -->
+  <link rel="icon" type="image/png" href="assets/logoMain.png" />
+  <link rel="apple-touch-icon" href="assets/logo.png" />
+  
   <title>Himanshu Jagtap | Software Engineer & Full-Stack Developer</title>
   <meta name="description" content="Personal portfolio of Himanshu Jagtap - Software Engineering Intern @ Enacton Technologies, Full-Stack React Native & MERN Stack Developer." />
   
@@ -154,8 +159,8 @@
       
       <!-- Monogram & Logo -->
       <a href="#hero" id="logo-trigger" title="Click 5 times for Developer Console" class="flex items-center gap-3 group cursor-pointer">
-        <div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary font-mono text-xs font-bold group-hover:scale-105 group-hover:bg-primary group-hover:text-white transition-all">
-          HJ
+        <div class="relative w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-primary via-indigo-500 to-accent shadow-glow transition-all duration-300 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.6)]">
+          <img src="assets/logo.png" alt="Himanshu Jagtap Logo" class="w-full h-full object-cover rounded-full bg-surface transition-transform duration-500 group-hover:rotate-12" />
         </div>
         <span class="font-display font-semibold tracking-tight text-sm text-text-main group-hover:text-primary transition-colors">
           HIMANSHU JAGTAP
@@ -214,15 +219,24 @@
       <!-- Left Content -->
       <div class="flex-1 space-y-6">
         
-        <!-- Role Badge -->
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-elevated border border-surface-border text-xs font-mono text-primary">
-          <span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
-          <span>Software Engineering Intern @ Enacton Technologies</span>
+        <!-- Creative Brand Emblem & Role Badge -->
+        <div class="flex items-center gap-3.5 flex-wrap">
+          <div class="relative group cursor-pointer">
+            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-primary via-indigo-500 to-accent opacity-70 blur transition duration-500 group-hover:opacity-100 group-hover:blur-md animate-pulse"></div>
+            <div class="relative w-11 h-11 rounded-xl bg-surface-elevated border border-white/10 p-1 flex items-center justify-center shadow-lg">
+              <img src="assets/logo.png" alt="Himanshu Jagtap" class="w-full h-full object-cover rounded-lg group-hover:scale-110 transition-transform duration-300" />
+            </div>
+          </div>
+          
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-elevated border border-surface-border text-xs font-mono text-primary shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+            <span class="font-bold text-sm">Software Engineering Intern @ Enacton Technologies</span>
+          </div>
         </div>
 
         <!-- Hero Headline -->
         <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold tracking-tight text-text-main leading-[1.1]">
-          Hi, I'm Himanshu.<br/>
+          Hi, I'm Himanshu <span class="text-text-main">(Raje)</span><br/>
           <span class="text-transparent bg-clip-text bg-gradient-to-r from-text-main via-indigo-200 to-primary">
             I build products that feel as good as they work.
           </span>
@@ -277,13 +291,17 @@
           <!-- Dynamic Node Diagram -->
           <div id="hero-node-container" class="relative my-6 h-64 flex flex-col justify-between items-center">
             
+            <!-- Central Brand Core Hub with Logo -->
+            <div class="absolute inset-0 m-auto w-12 h-12 rounded-full p-[2px] bg-gradient-to-tr from-primary via-indigo-400 to-accent shadow-glow flex items-center justify-center z-10 animate-pulse cursor-pointer hover:scale-125 transition-transform" title="Himanshu Architecture Core">
+              <img src="assets/logo.png" alt="Himanshu Core Logo" class="w-full h-full object-cover rounded-full bg-surface" />
+            </div>
+
             <!-- Connection Lines (SVG) -->
             <svg class="absolute inset-0 w-full h-full pointer-events-none stroke-primary/30" stroke-width="2" stroke-dasharray="4 4">
-              <line x1="50%" y1="15%" x2="20%" y2="45%"/>
-              <line x1="50%" y1="15%" x2="80%" y2="45%"/>
-              <line x1="20%" y1="45%" x2="50%" y2="85%"/>
-              <line x1="80%" y1="45%" x2="50%" y2="85%"/>
-              <line x1="50%" y1="45%" x2="50%" y2="85%"/>
+              <line x1="50%" y1="15%" x2="50%" y2="50%"/>
+              <line x1="20%" y1="45%" x2="50%" y2="50%"/>
+              <line x1="80%" y1="45%" x2="50%" y2="50%"/>
+              <line x1="50%" y1="85%" x2="50%" y2="50%"/>
             </svg>
 
             <!-- Top Node: React / React Native -->
@@ -337,7 +355,7 @@
         <!-- Main Statement Left -->
         <div class="lg:col-span-7 space-y-6">
           <h3 class="text-2xl sm:text-3xl font-display font-semibold text-text-main leading-snug">
-            "I'm a Software Engineering student and MERN stack developer who enjoys turning ideas into usable products."
+            "I'm a Software Engineering student, Mobile Application Developer, and Full-Stack Developer who enjoys turning ideas into usable products."
           </h3>
           <p class="text-text-muted leading-relaxed text-base">
             Results-oriented Software Engineering student & MERN stack developer focused on building scalable, client-focused solutions. I build mobile apps using React Native and high-performance backend systems with Node.js, Express, and MongoDB.
@@ -1147,7 +1165,7 @@
               <a href="https://github.com/HimanshuRaje" target="_blank" rel="noopener" class="flex-1 glass-card p-3 rounded-xl border border-white/10 text-center font-mono text-xs text-text-main hover:border-primary transition-all">
                 GitHub ↗
               </a>
-              <a href="https://www.linkedin.com/in/himanshu-jagtap-" target="_blank" rel="noopener" class="flex-1 glass-card p-3 rounded-xl border border-white/10 text-center font-mono text-xs text-text-main hover:border-primary transition-all">
+              <a href="https://www.linkedin.com/in/himanshu-jagtap-24225b306" target="_blank" rel="noopener" class="flex-1 glass-card p-3 rounded-xl border border-white/10 text-center font-mono text-xs text-text-main hover:border-primary transition-all">
                 LinkedIn ↗
               </a>
             </div>
@@ -1200,9 +1218,14 @@
   <footer class="border-t border-surface-border bg-surface py-12 px-6 md:px-12 relative z-10">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
       
-      <div class="space-y-1 text-center md:text-left">
-        <h4 class="font-display font-bold text-base text-text-main">HIMANSHU JAGTAP</h4>
-        <p class="font-mono text-xs text-text-dark">Software Engineer • React Native • MERN Stack</p>
+      <div class="flex items-center gap-3.5 text-center md:text-left">
+        <div class="relative w-10 h-10 rounded-xl p-[2px] bg-gradient-to-tr from-primary via-indigo-500 to-accent shadow-glow">
+          <img src="assets/logo.png" alt="Himanshu Jagtap Logo" class="w-full h-full object-cover rounded-[10px] bg-surface" />
+        </div>
+        <div class="space-y-0.5">
+          <h4 class="font-display font-bold text-base text-text-main leading-tight">HIMANSHU JAGTAP</h4>
+          <p class="font-mono text-xs text-text-dark">Software Engineer • React Native • MERN Stack</p>
+        </div>
       </div>
 
       <p class="font-mono text-xs text-text-muted italic">
@@ -1211,7 +1234,7 @@
 
       <div class="flex items-center gap-6 font-mono text-xs text-text-dark">
         <a href="https://github.com/HimanshuRaje" target="_blank" rel="noopener" class="hover:text-primary transition-colors">GitHub</a>
-        <a href="https://www.linkedin.com/in/himanshu-jagtap-" target="_blank" rel="noopener" class="hover:text-primary transition-colors">LinkedIn</a>
+        <a href="https://www.linkedin.com/in/himanshu-jagtap-24225b306" target="_blank" rel="noopener" class="hover:text-primary transition-colors">LinkedIn</a>
         <a href="mailto:himanshujagtap05@gmail.com" class="hover:text-primary transition-colors">Email</a>
         <span>© 2026</span>
       </div>
@@ -1274,11 +1297,12 @@
       
       <!-- Terminal Header Bar -->
       <div class="bg-zinc-900 px-4 py-2.5 border-b border-zinc-800 flex justify-between items-center text-zinc-400">
-        <div class="flex items-center gap-2">
-          <span class="w-3 h-3 rounded-full bg-red-500 cursor-pointer" onclick="toggleTerminal(false)"></span>
+        <div class="flex items-center gap-2.5">
+          <span class="w-3 h-3 rounded-full bg-red-500 cursor-pointer" onclick="toggleTerminal(false)" title="Close"></span>
           <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
           <span class="w-3 h-3 rounded-full bg-green-500"></span>
-          <span class="ml-2 text-zinc-300 font-bold">himanshu-shell v2.6.0 (tty1)</span>
+          <img src="assets/logo.png" alt="Terminal Logo" class="w-5 h-5 rounded-md object-cover border border-zinc-700 ml-1" />
+          <span class="text-zinc-300 font-bold">himanshu-shell v2.6.0 (tty1)</span>
         </div>
         <span class="text-[10px] text-zinc-500">Type 'help'</span>
       </div>
